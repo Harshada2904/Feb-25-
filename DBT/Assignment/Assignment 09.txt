@@ -1,0 +1,82 @@
+
+				Querying Multiple Tables at Once.
+
+
+1) Write a query that lists each order number followed by the name of the customer who made the order.
+Ans:-mysql> select onum, cname from orders ,customers
+    -> where orders.cnum = customers.cnum;
++------+----------+
+| onum | cname    |
++------+----------+
+| 3001 | Cisneros |
+| 3003 | Hoffman  |
+| 3002 | Pereira  |
+| 3005 | Liu      |
+| 3006 | Cisneros |
+| 3009 | Giovanni |
+| 3007 | Grass    |
+| 3008 | Clemens  |
+| 3010 | Grass    |
+| 3011 | Clemens  |
++------+----------+
+
+-------------------------------------------------------------------------------------------
+
+
+2) Write a query that gives the names of both the salesperson and the customer for each order along with the order number.
+mysql> select sname,cname,onum from salespepole,customers,orders
+    -> where orders.cnum = customers.cnum and
+    -> orders.snum = salespepole.snum;
++---------+----------+------+
+| sname   | cname    | onum |
++---------+----------+------+
+| Peel    | Hoffman  | 3003 |
+| Axelrod | Giovanni | 3009 |
+| Serres  | Liu      | 3005 |
+| Serres  | Grass    | 3010 |
+| Serres  | Grass    | 3007 |
+| Peel    | Clemens  | 3011 |
+| Peel    | Clemens  | 3008 |
+| Rifkin  | Cisneros | 3006 |
+| Rifkin  | Cisneros | 3001 |
+| Motika  | Pereira  | 3002 |
++---------+----------+------+
+
+-------------------------------------------------------------------------------------------
+
+
+3) Write a query that produces all customers serviced by salespeople with a commission above 12%. Output the customer’s name, the salesperson’s name, and the salesperson’s rate of commission.
+mysql> select cname,sname,comma from customers,salespepole
+    -> where salespepole.snum = customers.snum and salespepole.comma >0.10;
++----------+--------+-------+
+| cname    | sname  | comma |
++----------+--------+-------+
+| Hoffman  | Peel   |  0.12 |
+| Liu      | Serres |  0.13 |
+| Grass    | Serres |  0.13 |
+| Clemens  | Peel   |  0.12 |
+| Cisneros | Rifkin |  0.15 |
+| Pereira  | Motika |  0.11 |
++----------+--------+-------+
+
+
+
+-------------------------------------------------------------------------------------------
+
+
+
+4) Write a query that calculates the amount of the salesperson’s commission on each order by a customer with a rating above 100.
+
+mysql> select cname,onum,amt,sname,comma,(amt*comma /100) as commission_amount from salespepole,orders,customers
+    -> where customers.cnum = orders.cnum and customers.snum = salespepole.snum and customers.rating >100;
++----------+------+---------+---------+-------+---------------------+
+| cname    | onum | amt     | sname   | comma | commission_amount   |
++----------+------+---------+---------+-------+---------------------+
+| Cisneros | 3001 |   18.69 | Rifkin  |  0.15 | 0.02803500191509727 |
+| Liu      | 3005 | 5160.45 | Serres  |  0.13 |    6.70858500783681 |
+| Cisneros | 3006 | 1098.16 | Rifkin  |  0.15 |    1.64724011672497 |
+| Giovanni | 3009 | 1713.23 | Axelrod |  0.10 |   1.713230005997866 |
+| Grass    | 3007 |   75.75 | Serres  |  0.13 | 0.09847499638795852 |
+| Grass    | 3010 |    4723 | Serres  |  0.13 |    6.13989977478981 |
++----------+------+---------+---------+-------+---------------------+
+
