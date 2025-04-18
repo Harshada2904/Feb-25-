@@ -1,0 +1,147 @@
+1. Display all the Supplier names with the initial letter capital.
+mysql> select concat(upper(left(sname,1)), lower(substring(sname,2))) as supplier_name from supplier;
++---------------+
+| supplier_name |
++---------------+
+| Supplier1     |
+| Supplier2     |
+| Supplier3     |
+| Supplier4     |
+| Supplier5     |
+| Scola         |
+| Kiran         |
++---------------+
+
+
+
+2. Display all the Supplier names in upper case.
+mysql> select upper(sname) as supplier_name from supplier;
++---------------+
+| supplier_name |
++---------------+
+| SUPPLIER1     |
+| SUPPLIER2     |
+| SUPPLIER3     |
+| SUPPLIER4     |
+| SUPPLIER5     |
+| SCOLA         |
+| KIRAN         |
++---------------+
+
+
+
+3. Display all the Supplier names in lower case.
+mysql> select lower(sname) from supplier;
++--------------+
+| lower(sname) |
++--------------+
+| supplier1    |
+| supplier2    |
+| supplier3    |
+| supplier4    |
+| supplier5    |
+| scola        |
+| kiran        |
++--------------+
+
+
+
+4. Display all the Supplier names padded to 25 characters, with spaces on the left.
+mysql> select lpad(sname,25,' ') from supplier;
++---------------------------+
+| lpad(sname,25,' ')        |
++---------------------------+
+|                 supplier1 |
+|                 supplier2 |
+|                 supplier3 |
+|                 supplier4 |
+|                 supplier5 |
+|                     scola |
+|                     kiran |
++---------------------------+
+
+
+
+
+5. Display all the Supplier names (with ‘la’ replaced by ‘ro’).
+HINT: REPLACE.
+mysql> select replace(sname,'la','ro') from supplier;
++--------------------------+
+| replace(sname,'la','ro') |
++--------------------------+
+| supplier1                |
+| supplier2                |
+| supplier3                |
+| supplier4                |
+| supplier5                |
+| scoro                    |
+| kiran                    |
++--------------------------+
+
+
+
+6. Implement the above command such that ‘l’ is replaced with ‘r’ and ‘a’ is replaced with ‘o’.
+mysql> select replace(replace(sname,'l','r'), 'a','o') as modify_suppliername from supplier;
++---------------------+
+| modify_suppliername |
++---------------------+
+| supprier1           |
+| supprier2           |
+| supprier3           |
+| supprier4           |
+| supprier5           |
+| scoro               |
+| kiron               |
++---------------------+
+
+
+7. Display the Supplier names and the lengths of the names.
+mysql> select sname, length(sname) as name_length from supplier;
++-----------+-------------+
+| sname     | name_length |
++-----------+-------------+
+| supplier1 |           9 |
+| supplier2 |           9 |
+| supplier3 |           9 |
+| supplier4 |           9 |
+| supplier5 |           9 |
+| scola     |           5 |
+| kiran     |           5 |
++-----------+-------------+
+
+
+8. Use the soundex function to search for a supplier by the name of ‘BLOKE’.
+mysql> select sname from supplier where soundex(sname) = soundex('BLOKE');
+Empty set (0.01 sec)
+
+
+
+9. Display the Supplier name and the status (as Ten, Twenty, Thirty, etc.).
+mysql> select sname ,
+    -> case when status =10 then 'ten'
+    ->  when status =20 then 'twenty'
+    ->  when status =30 then 'thirty'
+    ->  when status =40 then 'fourty'
+    -> else 'other'
+    -> end as status_text
+    -> from supplier;
++-----------+-------------+
+| sname     | status_text |
++-----------+-------------+
+| supplier1 | ten         |
+| supplier2 | twenty      |
+| supplier3 | thirty      |
+| supplier4 | other       |
+| supplier5 | fourty      |
+| scola     | fourty      |
+| kiran     | other       |
++-----------+-------------+
+
+
+10. Display the current day (e.g. Thursday).
+mysql> select dayname(now()) as current_day;
++-------------+
+| current_day |
++-------------+
+| Thursday    |
++-------------+

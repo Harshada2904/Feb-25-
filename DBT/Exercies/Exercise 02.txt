@@ -1,0 +1,60 @@
+1. Display the Supplier table in the descending order of CITY.
+mysql> select * from supplier order by city desc;
++------+-----------+--------+--------+
+| s#   | sname     | status | city   |
++------+-----------+--------+--------+
+| s4   | supplier4 |     50 | uk     |
+| s2   | supplier2 |     20 | paris  |
+| s1   | supplier1 |     10 | london |
+| s5   | supplier5 |     40 | london |
+| s3   | supplier3 |     30 | athens |
++------+-----------+--------+--------+
+
+
+2. Display the Part Table in the ascending order of CITY and within the city in the ascending order of Part names.
+mysql> select * from parts order by city , pname;
++------+--------+-------+--------+--------+
+| p#   | pname  | color | weight | city   |
++------+--------+-------+--------+--------+
+| p3   | parts3 | green |     13 | athens |
+| p1   | parts1 | red   |   12.5 | london |
+| p2   | parts2 | blue  |     14 | paris  |
++------+--------+-------+--------+--------+
+
+3. Display all the Suppliers with a status between 10 and 20.
+mysql> select * from supplier
+    -> where `status` between 10 and 20;
++------+-----------+--------+--------+
+| s#   | sname     | status | city   |
++------+-----------+--------+--------+
+| s1   | supplier1 |     10 | london |
+| s2   | supplier2 |     20 | paris  |
++------+-----------+--------+--------+
+
+
+4. Display all the Parts and their Weight, which are not in the range of 10 and 15.
+mysql> select * from parts
+    -> where weight not between 10 and 15;
+Empty set (0.00 sec)
+
+
+5. Display all the Part names starting with the letter ‘S’.
+mysql> select * from parts where pname like '%s';
+Empty set (0.00 sec)
+
+
+6. Display all the Suppliers, belonging to cities starting with the letter ‘L’.
+mysql> select * from supplier where city like 'l%';
++------+-----------+--------+--------+
+| s#   | sname     | status | city   |
++------+-----------+--------+--------+
+| s1   | supplier1 |     10 | london |
+| s5   | supplier5 |     40 | london |
++------+-----------+--------+--------+
+
+
+
+7. Display all the Projects, with the third letter in JNAME as ‘n’.
+mysql> select * from project where jname like '__n%';
+Empty set (0.00 sec)
+

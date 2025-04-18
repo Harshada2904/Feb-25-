@@ -1,0 +1,114 @@
+1. Display the Supplier name and the Quantity sold.
+mysql> select sname, qty from sjp , supplier
+    -> where supplier.`s#`= sjp.`s#`;
++-----------+------+
+| sname     | qty  |
++-----------+------+
+| supplier1 |  100 |
+| supplier2 |  150 |
+| supplier3 |  200 |
++-----------+------+
+
+2. Display the Part name and Quantity sold.
+mysql> select pname, qty from sjp , parts
+    -> where parts.`p#`= sjp.`p#`;
++--------+------+
+| pname  | qty  |
++--------+------+
+| parts1 |  100 |
+| parts2 |  150 |
+| parts3 |  200 |
++--------+------+
+
+
+3. Display the Project name and Quantity sold.
+mysql> select jname, qty from sjp , project
+    -> where project.`j#` = sjp.`j#`;
++----------+------+
+| jname    | qty  |
++----------+------+
+| project1 |  100 |
+| project2 |  150 |
+| project3 |  200 |
++----------+------+
+
+
+
+4. Display the Supplier name, Part name, Project name and Quantity sold.
+mysql> select sname,pname,jname,qty from sjp,supplier,parts,project
+    -> where sjp.`s#`=supplier.`s#`
+    -> and sjp.`p#`= parts.`p#`
+    -> and sjp.`j#` = project.`j#`;
++-----------+--------+----------+------+
+| sname     | pname  | jname    | qty  |
++-----------+--------+----------+------+
+| supplier1 | parts1 | project1 |  100 |
+| supplier2 | parts2 | project2 |  150 |
+| supplier3 | parts3 | project3 |  200 |
++-----------+--------+----------+------+
+
+
+5. Display the Supplier name, Supplying Parts to a Project in the same City.
+mysql> select sname,pname,jname,qty from sjp, supplier,parts,project
+    -> where sjp.`s#`=supplier.`s#`
+    -> and sjp.`p#`= parts.`p#`
+    -> and sjp.`j#` = project.`j#`
+    -> and supplier.city = parts.city
+    -> and parts.city = project.city;
++-----------+--------+----------+------+
+| sname     | pname  | jname    | qty  |
++-----------+--------+----------+------+
+| supplier1 | parts1 | project1 |  100 |
++-----------+--------+----------+------+
+
+
+6. Display the Part name that is ‘Red’ is color, and the Quantity sold.
+mysql> select pname,qty from parts,sjp
+    -> where parts.`p#` = sjp.`p#` and parts.color = 'red';
++--------+------+
+| pname  | qty  |
++--------+------+
+| parts1 |  100 |
++--------+------+
+
+
+
+7. Display all the Quantity sold by Suppliers with the Status = 20.
+mysql> select qty,status from supplier,sjp
+    -> where supplier.`s#` = sjp.`s#` and supplier.status = 20;
++------+--------+
+| qty  | status |
++------+--------+
+|  150 |     20 |
++------+--------+
+
+
+8. Display all the Parts and Quantity with a Weight > 14.
+
+mysql> select pname,qty from sjp , parts
+    -> where sjp.`p#` = parts.`p#` and parts.weight > 14;
+
+
+
+
+9. Display all the Project names and City, which has bought more than 500 Parts.
+mysql> select jname, city from project, sjp
+    -> where project.`j#`=sjp.`j#` and sjp.qty>500;
+
+
+10. Display all the Part names and Quantity sold that have a Weight less than 15.
+mysql> select pname,qty from parts,sjp
+    -> where parts.`p#` = sjp.`p#` and parts.weight < 15;
++--------+------+
+| pname  | qty  |
++--------+------+
+| parts1 |  100 |
+| parts2 |  150 |
+| parts3 |  200 |
++--------+------+
+
+
+11. Display all the Employee names and the name of their Managers
+
+mysql> SELECT EMPLOYEE.ENAME, MANAGER.MNAME FROM EMPLOYEE, MANAGER
+    -> WHERE EMPLOYEE.MID = MANAGER.MID;
