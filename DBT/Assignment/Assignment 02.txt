@@ -1,0 +1,20 @@
+			Introducing Relational Databases.
+
+
+1) Which field of the Customers table is the primary key?
+Ans:- In customer table there is no primary key but if we want to set a primary key (for example, on Cnum)then simply write 
+      Cnum INT(4) PRIMARY KEY, when creating a table.
+
+
+2) What is the 4th column of the Customers table?
+Ans:- 4th column of the customer table is Rating.
+
+
+3) What is another word for row? For column?
+Ans:- Another word for row as Tuples and column as attribute. 
+
+
+4) Why isn’t it possible to see the first five rows of a table?
+Ans:- Because SQL tables are unordered by default — they are sets of data, not lists.
+
+

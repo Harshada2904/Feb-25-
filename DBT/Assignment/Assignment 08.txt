@@ -1,0 +1,69 @@
+				Formatting Query output.
+
+
+1) Assume each salesperson has a 12% commission. Write a query on the orders table that will produce the order number, the salesperson number, and the amount of the salesperson’s commission for that order.
+Ans:-mysql> select onum,snum,amt*0.12 as commission from orders;
++------+------+--------------------+
+| onum | snum | commission         |
++------+------+--------------------+
+| 3001 | 1007 |  2.242800064086914 |
+| 3003 | 1001 |  92.06280029296875 |
+| 3002 | 1004 |  228.0119970703125 |
+| 3005 | 1002 |     619.2540234375 |
+| 3006 | 1007 |  131.7792041015625 |
+| 3009 | 1003 | 205.58759765624998 |
+| 3007 | 1002 |               9.09 |
+| 3008 | 1001 |   157.193994140625 |
+| 3010 | 1002 |             566.76 |
+| 3011 | 1001 |    1187.0255859375 |
++------+------+--------------------+
+
+
+-------------------------------------------------------------------------------------------
+
+
+2) Write a query on the Customers table that will find the highest rating in each city. Put the output in this form:
+For the city (city), the highest rating is : (rating).
+Ans:-mysql> select city, max(rating) as rating from customers group by city;
++----------+--------+
+| city     | rating |
++----------+--------+
+| London   |    100 |
+| Rome     |    200 |
+| San Jose |    300 |
+| Berlin   |    300 |
++----------+--------+
+
+-------------------------------------------------------------------------------------------
+
+
+3) Write a query that lists customers in descending order of rating. Output the rating field first, followed by the customer’s name and number.
+mysql> select rating,cname,cnum from customers
+    -> order by rating desc;
++--------+----------+------+
+| rating | cname    | cnum |
++--------+----------+------+
+|    300 | Grass    | 2004 |
+|    300 | Cisneros | 2008 |
+|    200 | Giovanni | 2002 |
+|    200 | Liu      | 2003 |
+|    100 | Hoffman  | 2001 |
+|    100 | Clemens  | 2006 |
+|    100 | Pereira  | 2007 |
++--------+----------+------+
+
+-------------------------------------------------------------------------------------------
+
+
+4) Write a query that totals the orders for each day and places the results in descending order.
+Ans:-mysql> select odate,sum(amt) as total_order from orders
+    -> group by odate
+    -> order by total_order desc;
++------------+-------------------+
+| odate      | total_order       |
++------------+-------------------+
+| 1990-10-06 |  14614.8798828125 |
+| 1990-10-03 | 8944.590208053589 |
+| 1990-10-04 |  1788.97998046875 |
+| 1990-10-05 | 1309.949951171875 |
++------------+-------------------+

@@ -1,0 +1,85 @@
+				Data with Aggregate Functions.
+
+
+1) Write a query that counts all orders for October 3.
+Ans:- mysql> select count(*) as total_orders from orders where odate = '1990-10-03';
++--------------+
+| total_orders |
++--------------+
+|            5 |
++--------------+
+
+
+-------------------------------------------------------------------------------------------
+
+
+2) Write a query that counts the number of different non-NULL city values in the Customers table.
+Ans:- 
+
+ysql> select count(distinct city) from customers where city is not null;
++----------------------+
+| count(distinct city) |
++----------------------+
+|                    4 |
++----------------------+
+
+
+-------------------------------------------------------------------------------------------
+
+
+3) Write a query that selects each customer’s smallest order.
+Ans:- mysql> select cnum, MIN(amt) as smallest_order from orders group by cnum;
++------+----------------+
+| cnum | smallest_order |
++------+----------------+
+| 2008 |          18.69 |
+| 2001 |         767.19 |
+| 2007 |         1900.1 |
+| 2003 |        5160.45 |
+| 2002 |        1713.23 |
+| 2004 |          75.75 |
+| 2006 |        1309.95 |
++------+----------------+
+
+
+-------------------------------------------------------------------------------------------
+
+
+4) Write a query that selects the first customer, in alphabetical order, whose name begins with G.
+Ans:- mysql> select * from customers where cname like 'G%' order by cname asc limit 1;
++------+----------+------+--------+------+
+| Cnum | Cname    | City | Rating | Snum |
++------+----------+------+--------+------+
+| 2002 | Giovanni | Rome |    200 | 1003 |
++------+----------+------+--------+------+
+
+
+-------------------------------------------------------------------------------------------
+
+
+5) Write a query that selects the highest rating in each city.
+Ans:-mysql> select city, max(rating) from customers group by city;
++----------+-------------+
+| city     | max(rating) |
++----------+-------------+
+| London   |         100 |
+| Rome     |         200 |
+| San Jose |         300 |
+| Berlin   |         300 |
++----------+-------------+
+
+-------------------------------------------------------------------------------------------
+
+
+6) Write a query that counts the number of salespeople registering orders for each day. (If a salesperson has more than one order on a given day, he or she should be counted only once.).
+mysql> select odate ,count(distinct snum)
+    -> from orders
+    -> group by odate;
++------------+----------------------+
+| odate      | count(distinct snum) |
++------------+----------------------+
+| 1990-10-03 |                    4 |
+| 1990-10-04 |                    2 |
+| 1990-10-05 |                    1 |
+| 1990-10-06 |                    2 |
++------------+----------------------+

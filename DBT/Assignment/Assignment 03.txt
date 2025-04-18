@@ -1,0 +1,9 @@
+				Overview of SQL.
+
+
+1) Does ANSI recognize the data type DATE?
+Ans:- yes ,DATE is a part of ANSI recognize the data type.
+
+2) Which subdivision of SQL is used to insert values in tables?
+Ans:- DML (Data manipulation lanuage ) is subdivision of SQL is used to insert values in tables
+
